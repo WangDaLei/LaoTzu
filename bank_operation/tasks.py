@@ -8,6 +8,7 @@ from datetime import timedelta, datetime, date
 
 @periodic_task(run_every=crontab(hour=2, minute=5))
 # @periodic_task(run_every=timedelta(minutes=1))
+# Todo time is before 8 hours than actual time.
 def crawl_bank_info():
     os.system('cd bank_spider && scrapy crawl url_spider')
     os.system('cd bank_spider && scrapy crawl operation_spider')
