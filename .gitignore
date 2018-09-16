@@ -1,0 +1,8 @@
+*.pyc
+__pycache__/
+bank/__pycache__/
+bank_operation/__pycache__/
+bank_spider/__pycache__/
+bank_operation/migrations/
+migrations/
+celerybeat-schedule.*
