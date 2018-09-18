@@ -35,7 +35,7 @@ ITEM_PIPELINES = {
 }
 
 #Splash
-SPLASH_URL = "http://122.114.6.232:8050"
+SPLASH_URL = "http://127.0.0.1:8050"
 DOWNLOADER_MIDDLEWARES = {
 'scrapy_splash.SplashCookiesMiddleware': 723,
 'scrapy_splash.SplashMiddleware': 725,

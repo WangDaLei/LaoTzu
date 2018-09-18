@@ -3,18 +3,24 @@
 * <strong>CN:</strong>中国人民银行公开市场操作记录,使用Scrapy爬取数据，使用Django ORM模型存储数据.
 
 ### <strong>Requrements</strong>
-* The Project using [Scrapy](https://github.com/scrapy/scrapy) to crawl the web, and using [scrapy-splash](https://github.com/scrapy-plugins/scrapy-splash) to JavaScript integration.
-* First, we install all the dependence.
+* The Project using [Scrapy](https://github.com/scrapy/scrapy) to crawl the web, and using [scrapy-splash](https://github.com/scrapy-plugins/scrapy-splash) to JavaScript integration. My system is Ubuntu 18.04.
+* First, we install all the dependence. Make sure that python version is 3.X and mysql-server have been installed. And you should execute these commands : apt-get install libmysqlclient-dev python3-dev
 
     ``` 
     pip install -r requirements.txt
     ```
 * After that, we start a docker container to run splash.
 
+    if you have not install docker,you should install docker.
+    ```
+    sudo apt-get install docker.io    
+    ```
+    run these commands with root permission.
     ```
     docker pull scrapinghub/splash
     docker run -p 8050:8050 scrapinghub/splash
     ```
+    splash now is running at 127.0.0.1:8050, also you can run it at remote host, if that you should modify the setting files of spider.
 
 ### <strong>Install And Run</strong>
 
