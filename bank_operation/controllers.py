@@ -1,5 +1,6 @@
 import datetime
 import smtplib
+import mistune
 from smtplib import SMTP_SSL
 from email.mime.text import MIMEText
 from email.header import Header
@@ -50,7 +51,7 @@ def get_reverse_repo(date):
                         + str(one.duration)\
                         + str(one.duration_unit) + "\n"
     if str_repo != "":
-        str_repo = "逆回购今日操作:\n" + str_repo
+        str_repo = "## 逆回购今日操作:\n" + "```\n" + str_repo + "```\n"
 
     reverse_repo_deadline = OpenMarkOperationReverseRepo.objects\
                                         .filter(date__lt=date)\
@@ -66,7 +67,7 @@ def get_reverse_repo(date):
                             + str(one.duration_unit) + "\n"
 
     if str_repo_deadline != "":
-        str_repo_deadline = "逆回购今日到期:\n" + str_repo_deadline
+        str_repo_deadline = "## 逆回购今日到期:\n" + "```\n" + str_repo_deadline + + "```\n"
 
     reverse_repo_gt = OpenMarkOperationReverseRepo.objects\
                                         .filter(date__lt=date)\
@@ -82,7 +83,7 @@ def get_reverse_repo(date):
                             + str(one.duration_unit) + "\n"
 
     if str_repo_gt != "":
-        str_repo_gt = "逆回购有效操作:\n" + str_repo_gt
+        str_repo_gt = "## 逆回购有效操作:\n" + "```\n" + str_repo_gt + "```\n"
 
     return str_repo + str_repo_deadline + str_repo_gt
 
@@ -98,7 +99,7 @@ def get_mlf(date):
                         + str(one.duration)\
                         + str(one.duration_unit) + "\n"
     if str_mlf != "":
-        str_mlf = "MLF今日操作:\n" + str_mlf
+        str_mlf = "## MLF今日操作:\n" + "```\n" + str_mlf + "```\n"
 
     mlf_deadline = OpenMarkOperationMLF.objects\
                                         .filter(date__lt=date)\
@@ -121,13 +122,15 @@ def get_mlf(date):
                             + str(one.duration_unit) + "\n"
 
     if str_mlf_deadline != "":
-        str_mlf_deadline = "MLF今日到期:\n" + str_mlf_deadline
+        str_mlf_deadline = "## MLF今日到期:\n" + "```\n" + str_mlf_deadline + "```\n"
     if str_mlf_gt != "":
-        str_mlf_gt = "MLF有效操作:\n" + str_mlf_gt
+        str_mlf_gt = "## MLF有效操作:\n" + "```\n" + str_mlf_gt + "```\n"
 
     return str_mlf + str_mlf_deadline + str_mlf_gt
 
 def send_email(info):
+
+    info = mistune.markdown(info, escape=True, hard_wrap=True)
 
     mail_info = {
         "hostname": "smtp.qq.com",
@@ -145,7 +148,7 @@ def send_email(info):
     smtp.ehlo(mail_info["hostname"])
     smtp.login(mail_info["username"], mail_info["password"])
 
-    msg = MIMEText(mail_info["mail_text"], "plain", mail_info["mail_encoding"])
+    msg = MIMEText(mail_info["mail_text"], "html", mail_info["mail_encoding"])
     msg["Subject"] = Header(mail_info["mail_subject"], mail_info["mail_encoding"])
     msg["from"] = mail_info["from"]
     msg["to"] = ",".join(mail_info["to"])
