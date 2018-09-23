@@ -7,3 +7,4 @@ bank_operation/migrations/
 migrations/
 celerybeat-schedule.*
 celerybeat*
+config.py

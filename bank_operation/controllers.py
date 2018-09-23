@@ -5,6 +5,8 @@ from smtplib import SMTP_SSL
 from email.mime.text import MIMEText
 from email.header import Header
 from dateutil.relativedelta import relativedelta
+from bank.config import mail_hostname, mail_username, mail_password, mail_encoding,\
+			mail_from, mail_to
 from .models import  OpenMarkOperationReverseRepo, OpenMarkOperationMLF
 
 
@@ -133,14 +135,14 @@ def send_email(info):
     info = mistune.markdown(info, escape=True, hard_wrap=True)
 
     mail_info = {
-        "hostname": "smtp.qq.com",
-        "username": "363225484",
-        "password": "cmifnmacaqeabjaj",
-        "mail_encoding": "utf-8"
+        "hostname": mail_hostname,
+        "username": mail_username,
+        "password": mail_password,
+        "mail_encoding": mail_encoding
     }
 
-    mail_info["from"] = "363225484@qq.com"
-    mail_info["to"] = ["wangcppclei@gmail.com","363225484@qq.com"]
+    mail_info["from"] = mail_from
+    mail_info["to"] = mail_to
     mail_info["mail_subject"] = "央行今日操作和统计"
     mail_info["mail_text"] = info
 
