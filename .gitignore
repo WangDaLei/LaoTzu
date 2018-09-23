@@ -6,3 +6,4 @@ bank_spider/__pycache__/
 bank_operation/migrations/
 migrations/
 celerybeat-schedule.*
+celerybeat*
