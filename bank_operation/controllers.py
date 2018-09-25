@@ -69,7 +69,7 @@ def get_reverse_repo(date):
                             + str(one.duration_unit) + "\n"
 
     if str_repo_deadline != "":
-        str_repo_deadline = "## 逆回购今日到期:\n" + "```\n" + str_repo_deadline + + "```\n"
+        str_repo_deadline = "## 逆回购今日到期:\n" + "```\n" + str_repo_deadline + "```\n"
 
     reverse_repo_gt = OpenMarkOperationReverseRepo.objects\
                                         .filter(date__lt=date)\
