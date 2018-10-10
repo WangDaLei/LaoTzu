@@ -1,4 +1,4 @@
-Django==2.0
+Django==2.0.8
 PyMySQL==0.8.0
 scrapy==1.5.0
 scrapy_djangoitem==1.1.1
