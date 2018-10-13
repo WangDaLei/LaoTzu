@@ -14,9 +14,7 @@ def add_day(date, num):
     return date + datetime.timedelta(days = num)
 
 def add_month(date, num):
-    year_num = num // 12
-    month_num = num % 12
-    return date + relativedelta(months = month_num) + relativedelta(years = num)
+    return date + relativedelta(months = num)
 
 def add_year(date,num):
     return date + relativedelta(years = num)
